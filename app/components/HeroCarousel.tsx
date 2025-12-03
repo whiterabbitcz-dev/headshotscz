@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
+import { ArrowDown } from 'lucide-react'
 
 interface HeroCarouselProps {
   images: { src: string; alt: string }[]
@@ -91,10 +92,14 @@ export default function HeroCarousel({ images }: HeroCarouselProps) {
         <p className="hero-subtitle">Portrait Photographer</p>
       </div>
 
-      {/* Scroll indicator - positioned higher */}
+      {/* Scroll indicator with animated arrow */}
       <div className="hero-scroll-indicator">
         <span>Scroll</span>
-        <div className="hero-scroll-line" />
+        <ArrowDown 
+          className="hero-scroll-arrow" 
+          size={24} 
+          strokeWidth={1} 
+        />
       </div>
 
       {/* Slide navigation - Finn Daragh style */}
