@@ -21,14 +21,6 @@ export default function HeroCarousel({ images }: HeroCarouselProps) {
     setCurrentIndex(emblaApi.selectedScrollSnap())
   }, [emblaApi])
 
-  useEffect(() => {
-    if (!emblaApi) return
-    emblaApi.on('select', onSelect)
-    return () => {
-      emblaApi.off('select', onSelect)
-    }
-  }, [emblaApi, onSelect])
-
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev()
   }, [emblaApi])
@@ -36,6 +28,37 @@ export default function HeroCarousel({ images }: HeroCarouselProps) {
   const scrollNext = useCallback(() => {
     if (emblaApi) emblaApi.scrollNext()
   }, [emblaApi])
+
+  // Keyboard navigation for hero slider
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Only handle if no modal/lightbox is open (check for body overflow)
+      if (document.body.style.overflow === 'hidden') return
+      
+      switch (e.key) {
+        case 'ArrowLeft':
+          scrollPrev()
+          break
+        case 'ArrowRight':
+          scrollNext()
+          break
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [scrollPrev, scrollNext])
+
+  useEffect(() => {
+    if (!emblaApi) return
+    emblaApi.on('select', onSelect)
+    return () => {
+      emblaApi.off('select', onSelect)
+    }
+  }, [emblaApi, onSelect])
 
   // Format number with leading zero
   const formatNumber = (num: number) => {
@@ -68,7 +91,7 @@ export default function HeroCarousel({ images }: HeroCarouselProps) {
         <p className="hero-subtitle">Portrait Photographer</p>
       </div>
 
-      {/* Scroll indicator - repositioned */}
+      {/* Scroll indicator - positioned higher */}
       <div className="hero-scroll-indicator">
         <span>Scroll</span>
         <div className="hero-scroll-line" />

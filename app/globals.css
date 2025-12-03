@@ -211,10 +211,10 @@ button {
   color: rgba(255, 255, 255, 0.8);
 }
 
-/* Scroll indicator - fixed position */
+/* Scroll indicator - positioned higher for visibility */
 .hero-scroll-indicator {
   position: absolute;
-  bottom: 2.5rem;
+  bottom: 5rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
