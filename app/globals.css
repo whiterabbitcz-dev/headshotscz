@@ -48,7 +48,7 @@ button {
 }
 
 /* ========================================
-   HEADER - Transparent over hero
+   HEADER - Adaptive with scroll detection
    ======================================== */
 
 .header {
@@ -62,15 +62,27 @@ button {
   align-items: center;
   padding: 2rem 3rem;
   background: transparent;
-  mix-blend-mode: difference;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.logo {
+/* When scrolled - solid background */
+.header-scrolled {
+  background-color: var(--color-bg);
+  box-shadow: 0 1px 0 rgba(26, 26, 26, 0.08);
+}
+
+/* Logo and nav colors adapt based on scroll state */
+.header .logo {
   font-family: var(--font-serif);
   font-size: 1.25rem;
   font-weight: 400;
   letter-spacing: 0.05em;
   color: var(--color-white);
+  transition: color 0.3s ease;
+}
+
+.header-scrolled .logo {
+  color: var(--color-text);
 }
 
 .nav {
@@ -83,7 +95,11 @@ button {
   font-weight: 400;
   letter-spacing: 0.02em;
   color: var(--color-white);
-  transition: opacity 0.3s ease;
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.header-scrolled .nav a {
+  color: var(--color-text);
 }
 
 .nav a:hover {
@@ -102,6 +118,10 @@ button {
   background: var(--color-white);
   margin: 6px 0;
   transition: all 0.3s ease;
+}
+
+.header-scrolled .menu-toggle span {
+  background: var(--color-text);
 }
 
 /* ========================================
@@ -191,10 +211,10 @@ button {
   color: rgba(255, 255, 255, 0.8);
 }
 
-/* Scroll indicator */
+/* Scroll indicator - fixed position */
 .hero-scroll-indicator {
   position: absolute;
-  bottom: 3rem;
+  bottom: 2.5rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -205,15 +225,15 @@ button {
 }
 
 .hero-scroll-indicator span {
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.7);
 }
 
 .hero-scroll-line {
   width: 1px;
-  height: 40px;
+  height: 32px;
   background: linear-gradient(
     to bottom,
     rgba(255, 255, 255, 0.7),
@@ -227,29 +247,64 @@ button {
   50% { opacity: 0.5; transform: scaleY(0.8); }
 }
 
-/* Slide indicators */
-.hero-indicators {
+/* Slide navigation - Finn Daragh style */
+.hero-nav {
   position: absolute;
-  bottom: 3rem;
+  bottom: 2.5rem;
   right: 3rem;
   display: flex;
-  gap: 0.5rem;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
   z-index: 10;
 }
 
-.hero-indicator {
-  width: 32px;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease;
+.hero-nav-counter {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.9);
 }
 
-.hero-indicator.active {
-  background: rgba(255, 255, 255, 0.9);
+.hero-nav-current {
+  min-width: 1.25rem;
+  text-align: right;
 }
 
-.hero-indicator:hover {
-  background: rgba(255, 255, 255, 0.6);
+.hero-nav-divider {
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 300;
+}
+
+.hero-nav-total {
+  min-width: 1.25rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.hero-nav-arrows {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.hero-nav-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.2s ease;
+}
+
+.hero-nav-arrow:hover {
+  color: var(--color-white);
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* ========================================
@@ -557,7 +612,7 @@ button {
     font-size: clamp(2.5rem, 10vw, 4rem);
   }
   
-  .hero-indicators {
+  .hero-nav {
     right: 1.5rem;
     bottom: 2rem;
   }

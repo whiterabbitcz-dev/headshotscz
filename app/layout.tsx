@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
+import Header from './components/Header'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -15,20 +15,7 @@ export default function RootLayout({
   return (
     <html lang="cs">
       <body>
-        <header className="header">
-          <Link href="/" className="logo">
-            HEADSHOTS.CZ
-          </Link>
-          <nav className="nav">
-            <Link href="/">Home</Link>
-            <Link href="/about">About</Link>
-            <Link href="/book">Book</Link>
-          </nav>
-          <button className="menu-toggle" aria-label="Menu">
-            <span></span>
-            <span></span>
-          </button>
-        </header>
+        <Header />
 
         <main className="main">
           {children}

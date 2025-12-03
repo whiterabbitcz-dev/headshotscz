@@ -11,11 +11,10 @@ interface HeroCarouselProps {
 export default function HeroCarousel({ images }: HeroCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { loop: true, duration: 50 },
-    [Autoplay({ delay: 5000, stopOnInteraction: false })]
+    [Autoplay({ delay: 7000, stopOnInteraction: false })]
   )
   
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [isTransitioning, setIsTransitioning] = useState(false)
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return
@@ -24,19 +23,24 @@ export default function HeroCarousel({ images }: HeroCarouselProps) {
 
   useEffect(() => {
     if (!emblaApi) return
-    
     emblaApi.on('select', onSelect)
-    emblaApi.on('settle', () => setIsTransitioning(false))
-    emblaApi.on('scroll', () => setIsTransitioning(true))
-    
     return () => {
       emblaApi.off('select', onSelect)
     }
   }, [emblaApi, onSelect])
 
-  const scrollTo = useCallback((index: number) => {
-    if (emblaApi) emblaApi.scrollTo(index)
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev()
   }, [emblaApi])
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext()
+  }, [emblaApi])
+
+  // Format number with leading zero
+  const formatNumber = (num: number) => {
+    return num.toString().padStart(2, '0')
+  }
 
   return (
     <section className="hero-carousel">
@@ -64,24 +68,40 @@ export default function HeroCarousel({ images }: HeroCarouselProps) {
         <p className="hero-subtitle">Portrait Photographer</p>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator - repositioned */}
       <div className="hero-scroll-indicator">
         <span>Scroll</span>
         <div className="hero-scroll-line" />
       </div>
 
-      {/* Slide indicators */}
-      <div className="hero-indicators">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            className={`hero-indicator ${index === currentIndex ? 'active' : ''}`}
-            onClick={() => scrollTo(index)}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
+      {/* Slide navigation - Finn Daragh style */}
+      <div className="hero-nav">
+        <div className="hero-nav-counter">
+          <span className="hero-nav-current">{formatNumber(currentIndex + 1)}</span>
+          <span className="hero-nav-divider">――</span>
+          <span className="hero-nav-total">{formatNumber(images.length)}</span>
+        </div>
+        <div className="hero-nav-arrows">
+          <button 
+            className="hero-nav-arrow" 
+            onClick={scrollPrev}
+            aria-label="Previous slide"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+              <polyline points="15,18 9,12 15,6" />
+            </svg>
+          </button>
+          <button 
+            className="hero-nav-arrow" 
+            onClick={scrollNext}
+            aria-label="Next slide"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+              <polyline points="9,18 15,12 9,6" />
+            </svg>
+          </button>
+        </div>
       </div>
     </section>
   )
 }
-
