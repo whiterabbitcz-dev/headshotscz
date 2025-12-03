@@ -186,3 +186,4 @@ if __name__ == "__main__":
 
     print("\n✨ Hotovo! Nyní můžeš složku 'migration_data' použít pro White Rabbit workflow.")
 
+
