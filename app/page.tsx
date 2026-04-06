@@ -1,32 +1,35 @@
 'use client'
 
 import { useState } from 'react'
+import { assetPath } from '@/lib/assetPath'
 import HeroCarousel from './components/HeroCarousel'
 import MasonryGrid from './components/MasonryGrid'
 import Lightbox from './components/Lightbox'
 
+const sample = assetPath('/images/urxJ9pU2HeOM0VQeo0ZAufSWZs.jpg')
+
 // Hero carousel images (featured work)
 const heroImages = [
-  { src: '/images/urxJ9pU2HeOM0VQeo0ZAufSWZs.jpg', alt: 'Featured Portrait 1' },
-  { src: '/images/urxJ9pU2HeOM0VQeo0ZAufSWZs.jpg', alt: 'Featured Portrait 2' },
-  { src: '/images/urxJ9pU2HeOM0VQeo0ZAufSWZs.jpg', alt: 'Featured Portrait 3' },
-  { src: '/images/urxJ9pU2HeOM0VQeo0ZAufSWZs.jpg', alt: 'Featured Portrait 4' },
+  { src: sample, alt: 'Featured Portrait 1' },
+  { src: sample, alt: 'Featured Portrait 2' },
+  { src: sample, alt: 'Featured Portrait 3' },
+  { src: sample, alt: 'Featured Portrait 4' },
 ]
 
 // Gallery images (full portfolio)
 const galleryImages = [
-  { src: '/images/urxJ9pU2HeOM0VQeo0ZAufSWZs.jpg', alt: 'Portrait 1' },
-  { src: '/images/urxJ9pU2HeOM0VQeo0ZAufSWZs.jpg', alt: 'Portrait 2' },
-  { src: '/images/urxJ9pU2HeOM0VQeo0ZAufSWZs.jpg', alt: 'Portrait 3' },
-  { src: '/images/urxJ9pU2HeOM0VQeo0ZAufSWZs.jpg', alt: 'Portrait 4' },
-  { src: '/images/urxJ9pU2HeOM0VQeo0ZAufSWZs.jpg', alt: 'Portrait 5' },
-  { src: '/images/urxJ9pU2HeOM0VQeo0ZAufSWZs.jpg', alt: 'Portrait 6' },
-  { src: '/images/urxJ9pU2HeOM0VQeo0ZAufSWZs.jpg', alt: 'Portrait 7' },
-  { src: '/images/urxJ9pU2HeOM0VQeo0ZAufSWZs.jpg', alt: 'Portrait 8' },
-  { src: '/images/urxJ9pU2HeOM0VQeo0ZAufSWZs.jpg', alt: 'Portrait 9' },
-  { src: '/images/urxJ9pU2HeOM0VQeo0ZAufSWZs.jpg', alt: 'Portrait 10' },
-  { src: '/images/urxJ9pU2HeOM0VQeo0ZAufSWZs.jpg', alt: 'Portrait 11' },
-  { src: '/images/urxJ9pU2HeOM0VQeo0ZAufSWZs.jpg', alt: 'Portrait 12' },
+  { src: sample, alt: 'Portrait 1' },
+  { src: sample, alt: 'Portrait 2' },
+  { src: sample, alt: 'Portrait 3' },
+  { src: sample, alt: 'Portrait 4' },
+  { src: sample, alt: 'Portrait 5' },
+  { src: sample, alt: 'Portrait 6' },
+  { src: sample, alt: 'Portrait 7' },
+  { src: sample, alt: 'Portrait 8' },
+  { src: sample, alt: 'Portrait 9' },
+  { src: sample, alt: 'Portrait 10' },
+  { src: sample, alt: 'Portrait 11' },
+  { src: sample, alt: 'Portrait 12' },
 ]
 
 export default function Home() {

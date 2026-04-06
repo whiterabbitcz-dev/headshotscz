@@ -1,10 +1,12 @@
+import { assetPath } from '@/lib/assetPath'
+
 export default function About() {
   return (
     <div className="about-container">
       <div className="about-grid">
         <div className="about-image">
           <img 
-            src="/images/urxJ9pU2HeOM0VQeo0ZAufSWZs.jpg" 
+            src={assetPath('/images/urxJ9pU2HeOM0VQeo0ZAufSWZs.jpg')} 
             alt="Martin Svoboda"
           />
         </div>
